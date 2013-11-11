@@ -1,0 +1,6 @@
+# Changes in any watched directories or files will trigger a tishadow
+# rebuild
+
+guard :tishadow do
+  watch('app')
+end
