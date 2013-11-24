@@ -33,7 +33,7 @@ module Guard
     # @!method start
     def start
       Server.supervise_as :tishadow_server, self, :run_on_connect
-      Builder.supervise_as :tishadow_builder, :build_command => @build_command
+      Builder.supervise_as :tishadow_builder, :build_command => @build_command, :verbose => @verbose, :update => @update
       @builder = Celluloid::Actor[:tishadow_builder]
       @server = Celluloid::Actor[:tishadow_server]
       @server.async.start
@@ -79,7 +79,7 @@ module Guard
     # @!method run_all
     def run_all
       #run_on_changes(Watcher.match_files(self, Dir.glob("**/*.*")))
-      @builder.notify
+      @builder.notify(true)
     end
 
     # Default behaviour on file(s) changes that the Guard plugin watches.
