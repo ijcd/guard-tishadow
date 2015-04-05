@@ -1,6 +1,6 @@
 # Guard::Tishadow
 
-TODO: Write a gem description
+Guard::Tishadow manages [TIShadow](http://tishadow.yydigital.com/) for easier Titanium development.
 
 ## Installation
 
@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+guard 'tishadow', :app_root => "testapp" do
+  watch(%r{^testapp/app/.*})
+  watch(%r{^testapp/tiapp.xml})
+  watch(%r{^testapp/spec/(.*)\.js})
+end
+```
 
 ## Contributing
 
