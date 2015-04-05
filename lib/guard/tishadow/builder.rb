@@ -13,6 +13,7 @@ module Guard
         @verbose = options.delete(:verbose)
         @update = options.delete(:update)
         @spec = options.delete(:spec)
+        @app_root = options.delete(:app_root)
         @update = true if @update.nil?
         @last_notice_at = nil
         @clock = nil
@@ -84,6 +85,7 @@ module Guard
       end
       
       def shell_command(cmd)
+        cmd = "(cd #{@app_root} && #{cmd})" if @app_root
         UI.info(cmd)
         format_result(`#{cmd}`)
       end

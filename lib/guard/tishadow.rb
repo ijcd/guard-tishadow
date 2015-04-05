@@ -25,6 +25,7 @@ module Guard
       @verbose = options.has_key?(:verbose) ? options.delete(:verbose) : false
       @update = options.has_key?(:update) ? options.delete(:update) : false
       @spec = options.has_key?(:spec) ? options.delete(:spec) : true
+      @app_root = options.delete(:app_root)
       super
     end
 
@@ -37,7 +38,7 @@ module Guard
     # @!method start
     def start
       Server.supervise_as :tishadow_server, self, :run_on_connect
-      Builder.supervise_as :tishadow_builder, :build_command => @build_command, :verbose => @verbose, :update => @update, :spec => @spec
+      Builder.supervise_as :tishadow_builder, :build_command => @build_command, :verbose => @verbose, :update => @update, :spec => @spec, :app_root => @app_root
       @builder = Celluloid::Actor[:tishadow_builder]
       @server = Celluloid::Actor[:tishadow_server]
       @server.async.start
